@@ -37,4 +37,6 @@ RUN apt-get update && \
     && colcon build' && \
     apt-get clean
 
+RUN apt-get install ros-${ROS_DISTRO}-rosbridge-server
+
 CMD ["/bin/bash", "-c", "source /opt/ros/${ROS_DISTRO}/setup.bash && source /ros2_ws/install/setup.bash && ros2 launch sjtu_drone_bringup sjtu_drone_bringup.launch.py"]
