@@ -1,0 +1,20 @@
+name: drone-sim
+root: .
+on_project_exit: tmux kill-window
+
+windows:
+  - GCS:
+      layout: tiled
+      panes:
+        - sim:
+            - ./run_docker2.sh
+        - bridge:
+            - sleep 3
+            - docker exec -it sjtu_drone bash --login;
+            - source /opt/ros/iron/setup.bash
+            - ros2 launch rosbridge rosbridge_websocket.launch.py
+        - aux:
+            - sleep 4
+            - docker exec -it sjtu_drone bash --login;
+            - source /opt/ros/iron/setup.bash
+            - ros2 topic list
